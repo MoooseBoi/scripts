@@ -1,9 +1,5 @@
 #!/bin/sh
 
-# environment variables
-export EDITOR="nvim"
-export XDG_CONFIG_HOME="$HOME/.config"
-
 # remap Esc
 setxkbmap -option caps:escape
 
@@ -14,4 +10,5 @@ setxkbmap -option caps:escape
 picom -b
 sxhkd &
 dunst &
+nm-applet &
 blueman-applet &
