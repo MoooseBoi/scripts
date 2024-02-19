@@ -4,7 +4,7 @@ change_lang ()
 {
   setxkbmap $1
   setxkbmap -option caps:escape  # my Esc key is broken LOL
-  dunstify -u 0 "Changed language" $2
+  notify-send -u low "Changed language" $2
 }
 
 # get current set language
