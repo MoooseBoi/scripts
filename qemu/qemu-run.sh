@@ -1,9 +1,6 @@
 #!/bin/bash
-# list existing vms in $HOME/VMs.
-# choose vm
-# run vm with data from config file.
 
-[ "$1" == "" ] && exit 1
+[ "$1" == "" ] && echo "invalid argument" && exit 1
 
 dir=$HOME/VMs/data/$1
 

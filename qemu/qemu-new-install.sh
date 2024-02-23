@@ -1,12 +1,4 @@
 #!/bin/bash
-# input screen to select hardware options (add a bunch of defaults to make my life easier LOL)
-# in $HOME/VMs folder, create new folder for this VM and create:
-# - disk image
-# - create config file with input options
-# - create snapshot folder
-#
-# after finishing configuration, run vm with .iso first. 
-# once installation complete, and vm closed, finish.
 
 choose_name() {  
   read -p "Choose VM name: " name
@@ -62,8 +54,5 @@ choose_ram
 
 load_config
 
-cmd="qemu-system-x86_64 -enable-kvm -cdrom $iso -boot d -drive file=$dir/disk.qcow2 -m $ram -cpu host -vga virtio -display sdl,gl=on"
-echo $cmd
-
-exec $cmd
+qemu-system-x86_64 -enable-kvm -cdrom $iso -boot d -drive file=$dir/disk.qcow2 -m $ram -cpu host -vga virtio -display sdl,gl=on
 

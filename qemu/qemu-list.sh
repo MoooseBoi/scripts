@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# this implementation is so stupid lmao
+# might as well just `ls $HOME/VMs/data`
 vms=($(ls $HOME/VMs/data))
 length=$((${#vms[@]}-1))
 
