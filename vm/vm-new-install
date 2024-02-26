@@ -1,0 +1,43 @@
+#!/bin/bash
+
+read -p "Choose VM name: " name
+dir=$HOME/VMs/data/$name
+
+[ -f $dir ] &&
+  read -p "a VM with this name exists, would you like to delete it? [y,N]: " answer &&
+  [ "$answer" == "y" ] && 
+  rm -rf $dir  # haha funny rm -rf
+
+mkdir $dir
+
+
+iso_files=("", $(ls $HOME/VMs/iso))
+length=$((${#iso_files[@]}-1))
+
+for i in $(seq 1 $length); do
+  echo "$i. ${iso_files[$i]}"
+done
+
+read -p "Choose .iso file [1-$length]: " iso_index
+iso="$HOME/VMs/iso/${iso_files[$iso_index]}"
+
+
+# read -p "choose fs format: " fs
+# available=$(df -h | grep /dev/nvme0n1p7) &&
+read -p "Choose disk size: " disk_size
+qemu-img create -f qcow2 $dir/disk.qcow2 $disk_size
+
+
+read -p "Choose RAM [default=2G]: " ram
+[ "$ram" == "" ] && ram="2G"
+
+
+echo "ram=$ram" >> $dir/config
+# system type?
+# cpu options?
+# video options?
+
+
+cmd="qemu-system-x86_64 -enable-kvm -cdrom $iso -boot d -drive file=$dir/disk.qcow2 -m $ram -cpu host -vga virtio -display sdl,gl=on"
+echo $cmd
+exec $cmd
