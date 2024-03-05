@@ -2,20 +2,25 @@
 
 change_lang ()
 {
+  echo $1 > /tmp/lang
   setxkbmap $1
   setxkbmap -option caps:escape  # my Esc key is broken LOL
   notify-send -u low "Changed language" $2
 }
 
+fallback () {
+  echo us > /tmp/lang
+}
+
 # initiate lang file
-[ ! -f /tmp/lang ] && echo "us" > /tmp/lang
+[ ! -f /tmp/lang ] && fallback
 
 # get current set language
 lang="$(cat /tmp/lang)"
 
 # toggle language
 case $lang in
-  "us") echo "il" > /tmp/lang && change_lang il "Hebrew";;
-  "il") echo "us" > /tmp/lang && change_lang us "English";;
-  *) echo "us" > /tmp/lang && notify-send "lang error" "how?..."
+  "us") change_lang il "Hebrew";;
+  "il") change_lang us "English";;
+  *) fallback && notify-send "lang error" "how?..."
 esac
