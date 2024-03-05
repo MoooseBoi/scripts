@@ -7,12 +7,15 @@ change_lang ()
   notify-send -u low "Changed language" $2
 }
 
-# get current set language
-current="$(cat /tmp/lang)"
-
 # initiate lang file
-[ $? -eq 1 ] && echo "us" > /tmp/lang && current="us"
+[ ! -f /tmp/lang ] && echo "us" > /tmp/lang
+
+# get current set language
+lang="$(cat /tmp/lang)"
 
 # toggle language
-[ "$current" == "us" ] && echo "il" > /tmp/lang && change_lang il "Hebrew" 
-[ "$current" == "il" ] && echo "us" > /tmp/lang && change_lang us "English"
+case $lang in
+  "us") echo "il" > /tmp/lang && change_lang il "Hebrew";;
+  "il") echo "us" > /tmp/lang && change_lang us "English";;
+  *) echo "us" > /tmp/lang && notify-send "lang error" "how?..."
+esac
