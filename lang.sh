@@ -9,13 +9,13 @@ change_lang ()
 }
 
 fallback () {
-  echo us > /tmp/lang
+  echo "us" > /tmp/lang
 }
 
-# initiate lang file
+# prevent issues if file wasnt created/deleted
 [ ! -f /tmp/lang ] && fallback
 
-# get current set language
+# get current keymap
 lang="$(cat /tmp/lang)"
 
 # toggle language
