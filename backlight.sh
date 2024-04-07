@@ -8,8 +8,6 @@ if [[ ! "$1" =~ ^[1-6]$ ]]; then
   echo $usage
   exit 1
 fi
-echo test
-exit 0
 
 bright=$(($1*20000))
 echo $bright | sudo tee /sys/class/backlight/intel_backlight/brightness
