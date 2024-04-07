@@ -1,12 +1,15 @@
 #!/bin/bash
-# note: i used `chown $USER /sys/class/backlight/.../brightness` to make this easy
+# note: the limit 1 - 6 was chosen by hand since max brightness is 120000. (hence brightness = $1 * 20000)
+# feel free to change this as you wish
 
 usage="Usage: $0 [1-6]"
 
-if ! echo $1 | grep -q "[1-6]"; then
+if [[ ! "$1" =~ ^[1-6]$ ]]; then
   echo $usage
   exit 1
 fi
+echo test
+exit 0
 
 bright=$(($1*20000))
-echo $bright > /sys/class/backlight/intel_backlight/brightness
+echo $bright | sudo tee /sys/class/backlight/intel_backlight/brightness
