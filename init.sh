@@ -7,8 +7,9 @@ setxkbmap -option caps:escape
 ~/.fehbg
 
 # daemon apps
-picom -b
+blueman-applet &
+nm-applet &
 sxhkd &
 dunst &
-nm-applet &
-blueman-applet &
+incrond &
+picom -b
