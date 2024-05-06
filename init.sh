@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# remap Esc
-setxkbmap -option caps:escape
-
 # background
 ~/.fehbg
 
@@ -11,5 +8,4 @@ blueman-applet &
 nm-applet &
 sxhkd &
 dunst &
-incrond &
 picom -b

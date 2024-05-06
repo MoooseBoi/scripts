@@ -4,7 +4,6 @@ change_lang ()
 {
   echo $1 > /tmp/lang
   setxkbmap $1
-  setxkbmap -option caps:escape  # my Esc key is broken LOL
   notify-send -u low "Changed language" $2
 }
 
