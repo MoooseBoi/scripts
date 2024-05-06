@@ -8,4 +8,3 @@ blueman-applet &
 nm-applet &
 sxhkd &
 dunst &
-picom -b
